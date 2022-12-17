@@ -14,16 +14,11 @@
       var countDownDate;
       var x; // Declare the variable for the setInterval function so we can clear it later
       var paused = false; // Keep track of whether the timer is paused or not
+      var remainingTime; // Keep track of the remaining time on the timer
 
       // Set the date we're counting down to
-      function startTimer() {
-        if (paused) {
-          // If the timer was paused, use the time remaining on the timer as the new count down date
-          countDownDate = new Date().getTime() + timeRemaining;
-        } else {
-          // Otherwise, start the timer from 30 seconds
-          countDownDate = new Date().getTime() + 30000;
-        }
+      function startTimer(time) {
+        countDownDate = new Date().getTime() + time; // The specified amount of time from now
 
         // Update the count down every 1 second
         x = setInterval(function() {
@@ -51,18 +46,22 @@
       }
 
       // Start the timer when the page loads
-      startTimer();
+      startTimer(30000); // 30 seconds from now
 
       // Add an event listener to the pause button
       document.getElementById("pauseButton").addEventListener("click", function() {
         clearInterval(x); // Clear the interval to stop the timer
         paused = true; // Update the paused flag
+
+        // Calculate the remaining time on the timer
+        var now = new Date().getTime();
+        remainingTime = countDownDate - now;
       });
 
       // Add an event listener to the resume button
       document.getElementById("resumeButton").addEventListener("click", function() {
         if (paused) { // Only start the timer if it was previously paused
-          startTimer();
+          startTimer(remainingTime);
           paused = false; // Update the paused flag
         }
       });
@@ -70,7 +69,7 @@
       // Add an event listener to the restart button
       document.getElementById("restartButton").addEventListener("click", function() {
         clearInterval(x); // Clear the interval to stop the timer
-        startTimer(); // Start the timer again
+        startTimer(30000); // Start the timer again
         paused = false; // Update the paused flag
       });
     </script>
