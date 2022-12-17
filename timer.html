@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <title>Timer Example</title>
+  </head>
+  <body>
+    <h1>Timer Example</h1>
+    <p>The timer will start when you load the page:</p>
+    <p id="timer">0</p>
+    <button id="pauseButton">Pause Timer</button>
+    <button id="resumeButton">Resume Timer</button>
+    <button id="restartButton">Restart Timer</button>
+
+    <script>
+      var countDownDate;
+      var x; // Declare the variable for the setInterval function so we can clear it later
+      var paused = false; // Keep track of whether the timer is paused or not
+
+      // Set the date we're counting down to
+      function startTimer() {
+        if (paused) {
+          // If the timer was paused, use the time remaining on the timer as the new count down date
+          countDownDate = new Date().getTime() + timeRemaining;
+        } else {
+          // Otherwise, start the timer from 30 seconds
+          countDownDate = new Date().getTime() + 30000;
+        }
+
+        // Update the count down every 1 second
+        x = setInterval(function() {
+          // Get today's date and time
+          var now = new Date().getTime();
+
+          // Find the distance between now and the count down date
+          var distance = countDownDate - now;
+
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          // Display the result in the element with id="timer"
+          document.getElementById("timer").innerHTML = seconds + "s ";
+
+          // If the count down is finished, write some text
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("timer").innerHTML = "EXPIRED";
+          }
+        }, 1000);
+      }
+
+      // Start the timer when the page loads
+      startTimer();
+
+      // Add an event listener to the pause button
+      document.getElementById("pauseButton").addEventListener("click", function() {
+        clearInterval(x); // Clear the interval to stop the timer
+        paused = true; // Update the paused flag
+      });
+
+      // Add an event listener to the resume button
+      document.getElementById("resumeButton").addEventListener("click", function() {
+        if (paused) { // Only start the timer if it was previously paused
+          startTimer();
+          paused = false; // Update the paused flag
+        }
+      });
+
+      // Add an event listener to the restart button
+      document.getElementById("restartButton").addEventListener("click", function() {
+        clearInterval(x); // Clear the interval to stop the timer
+        startTimer(); // Start the timer again
+        paused = false; // Update the paused flag
+      });
+    </script>
+  </body>
+</html>
