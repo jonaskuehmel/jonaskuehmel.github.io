@@ -1,9 +1,63 @@
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    
+    
+    <style>
+      /* Style the body element to center the content */
+      body {
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Style the timer */
+      #timer {
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+        color: blue;
+        display: block;
+        box-sizing: border-box;
+        width: 150px;
+        background-color: #b1d1b1;
+        border-radius: 10px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        color: #333333;
+        font-size: 36px;
+      }
+
+
+      /* Style the buttons */
+      button {
+        font-size: 18px;
+        font-weight: bold;
+        width: 180px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Style the pause button */
+      #pauseButton {
+        background-color: #A9CCE3;
+      }
+
+      /* Style the resume button */
+      #resumeButton {
+        background-color: #AED6F1;
+      }
+
+      /* Style the restart button */
+      #restartButton {
+        background-color: #D1E0E3;
+      }
+    </style>
     <title>Timer Example</title>
   </head>
   <body>
-    <h1>Timer Example</h1>
+    <h1>My Timer</h1>
     <p>The timer will start when you load the page:</p>
     <p id="timer">0</p>
     <button id="pauseButton">Pause Timer</button>
@@ -11,6 +65,8 @@
     <button id="restartButton">Restart Timer</button>
 
     <script>
+
+
       var countDownDate;
       var x; // Declare the variable for the setInterval function so we can clear it later
       var paused = false; // Keep track of whether the timer is paused or not
@@ -46,7 +102,7 @@
       }
 
       // Start the timer when the page loads
-      startTimer(30000); // 30 seconds from now
+      startTimer(10000); // 30 seconds from now
 
       // Add an event listener to the pause button
       document.getElementById("pauseButton").addEventListener("click", function() {
